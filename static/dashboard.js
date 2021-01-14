@@ -1103,10 +1103,10 @@ $.each(hosp_dep_var, function( index,value ) {
     }
 });
 
-   
 // hover progress
 // $('.progress[data-toggle="tooltip"]').tooltip({
 //     animated: 'fade',
 //     placement: 'bottom'
 // });
+
 

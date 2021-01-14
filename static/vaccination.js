@@ -175,3 +175,111 @@ $( function() {
       }
     });
   });
+
+
+  // CHART SOLDE VACCINATIONS PAR REG
+
+var ctx = document.getElementById('Chart_solde_vaccin').getContext('2d');
+
+// colors
+var myColors_2=[];
+
+var green_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+green_gradient.addColorStop(0, 'green');
+green_gradient.addColorStop(1, 'chartreuse');
+
+var red_gradient = ctx.createLinearGradient(0, 0, 0, 600);
+red_gradient.addColorStop(0, 'white');
+red_gradient.addColorStop(1, 'red');
+
+$.each(solde_vaccin_reg, function( index,value ) {
+  if(value < 0){
+  	 myColors_2[index]=red_gradient;
+  }else{
+  	myColors_2[index]=green_gradient;
+  }
+});
+
+// Chart
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: regions,
+            datasets: [{
+                label: 'variation du nombre de personnes vaccinées pour 100k hab vs J-1',
+                backgroundColor: myColors_2,
+                data: solde_vaccin_reg,
+                datalabels: {
+                    align: 'end',
+                    color: function(context) {
+                      return context.dataset.borderColor;
+                    },
+                    font: {
+                      size: 10,
+                      weight: 'bold'
+                    },
+                    formatter: function(value) {
+                      return value ;
+                    }
+                  }
+            }]
+        },
+        options: { 
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            scales: {
+            xAxes: [{
+                gridLines: {
+                    display:false,
+                },
+                display: true,
+                ticks: {
+                    labelOffset: 25,
+                    fontStyle: 'bold',
+                    fontSize: 14,
+                    maxRotation: 30,
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    display:true
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                        if(label>0){
+                            return '+' + label
+                        }else{
+                            return label
+                        }
+                    },
+                    fontStyle: 'bold',
+                }
+            }]
+        },
+        showTooltips: true,
+        tooltips: {
+            backgroundColor: 'rgba(0,0,0,1)',
+            callbacks: {
+                label: function(tooltipItem) {
+                    if (tooltipItem.yLabel < 0){
+                        return regions[tooltipItem.index] + ' : ' + tooltipItem.yLabel;
+                    }else{
+                        return regions[tooltipItem.index] + ' : +' + tooltipItem.yLabel;
+                    }
+                },
+                footer: function(tooltipItem) {
+                    if (tooltipItem.yLabel < 0){
+                        return 'solde J-1 : ' + solde_vaccin_reg[tooltipItem[0].index] ;
+                    }else{
+                        return 'solde J-1 : ' + solde_vaccin_reg[tooltipItem[0].index] ;
+                    }
+                }
+         }},
+        responsive: true,
+                
+    }
+});

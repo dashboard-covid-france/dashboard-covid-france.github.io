@@ -35,6 +35,7 @@ options_chart_total_vaccin_1 = {
             display:true
         },
         ticks: {
+            beginAtZero: true,
             fontStyle: 'bold',
         }
     }]
@@ -70,6 +71,7 @@ options_chart_total_vaccin_2 = {
             display:true
         },
         ticks: {
+            beginAtZero: true,
             fontStyle: 'bold',
         }
     }]
@@ -105,6 +107,7 @@ options_chart_total_vaccin_3 = {
             display:true
         },
         ticks: {
+            beginAtZero: true,
             fontStyle: 'bold',
         }
     }]

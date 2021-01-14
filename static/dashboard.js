@@ -1083,7 +1083,14 @@ $.each(hosp_dep_var, function( index,value ) {
                     onProgress: function () {
                         var chartInstance = this.chart,
                             ctx = chartInstance.ctx;
-                        ctx.font = Chart.helpers.fontString(10, 'bold', Chart.defaults.global.defaultFontFamily);
+                        if ($( window ).width()<600){
+                            ctx.font = Chart.helpers.fontString(4, 'bold', Chart.defaults.global.defaultFontFamily);
+                        }else if($( window ).width()<950){
+                            ctx.font = Chart.helpers.fontString(7, 'bold', Chart.defaults.global.defaultFontFamily);
+                        }else{
+                            ctx.font = Chart.helpers.fontString(10, 'bold', Chart.defaults.global.defaultFontFamily);
+
+                        }
                         ctx.textAlign = 'center';
                         ctx.textBaseline = 'bottom';
             

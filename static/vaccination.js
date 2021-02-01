@@ -177,7 +177,8 @@ $( function() {
   });
 
 
-  // CHART SOLDE VACCINATIONS PAR REG
+
+// CHART SOLDE VACCINATIONS PAR REG
 
 var ctx = document.getElementById('Chart_solde_vaccin').getContext('2d');
 
@@ -251,9 +252,9 @@ $.each(solde_vaccin_reg, function( index,value ) {
                 ticks: {
                     callback: function(label, index, labels) {
                         if(label>0){
-                            return '+' + label
+                            return '+' + label + '%'
                         }else{
-                            return label
+                            return label + '%'
                         }
                     },
                     fontStyle: 'bold',
@@ -279,6 +280,86 @@ $.each(solde_vaccin_reg, function( index,value ) {
                     }
                 }
          }},
+        responsive: true,
+                
+    }
+});
+
+
+// CHART SOLDE VACCINATIONS PAR REG
+
+var ctx = document.getElementById('Chart_vaccin_age').getContext('2d');
+
+// colors
+
+$.each(pct_vaccines_age, function( index,value ) {
+  if(value < 0){
+  	 myColors_2[index]=red_gradient;
+  }else{
+  	myColors_2[index]=green_gradient;
+  }
+});
+
+// Chart
+    var chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: cl_age_vaccin,
+            datasets: [{
+                label: 'Français vaccinés au sein de la classe d\'âge',
+                backgroundColor: myColors_2,
+                data: pct_vaccines_age,
+                datalabels: {
+                    align: 'end',
+                    color: function(context) {
+                      return context.dataset.borderColor;
+                    },
+                    font: {
+                      size: 10,
+                      weight: 'bold'
+                    },
+                    formatter: function(value) {
+                      return value ;
+                    }
+                  }
+            }]
+        },
+        options: { 
+            layout: {
+                padding: {
+                    top: 10,
+                    bottom: 10
+                }
+            },
+            scales: {
+            xAxes: [{
+                gridLines: {
+                    display:false,
+                },
+                display: true,
+                ticks: {
+                    labelOffset: 25,
+                    fontStyle: 'bold',
+                    fontSize: 14,
+                    maxRotation: 30,
+                }
+            }],
+            yAxes: [{
+                gridLines: {
+                    display:true
+                },
+                ticks: {
+                    callback: function(label, index, labels) {
+                            return label + '%'
+                    },
+                    fontStyle: 'bold',
+                }
+            }]
+        },
+        showTooltips: true,
+        tooltips: {
+            backgroundColor: 'rgba(0,0,0,1)',   
+         },
         responsive: true,
                 
     }

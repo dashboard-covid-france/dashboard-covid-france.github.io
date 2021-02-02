@@ -3,7 +3,7 @@ Chart.defaults.global.legend.display = false;
 // langue dates
 moment.locale('fr');
 
-// Chart taux de positivité
+// Chart nombre vaccinations total
 
 options_chart_total_vaccin_1 = {
     layout: {
@@ -123,10 +123,29 @@ green_gradient.addColorStop(0, 'green');
 green_gradient.addColorStop(1, 'chartreuse');
 
     var chart_total_vaccin = new Chart(ctx, {
-        type: 'line',
+        type: 'bar',
         data: {
             labels: dates_vaccin,
             datasets: [{
+                type: 'bar',
+                label: 'vaccinations quotidiennes',
+                backgroundColor: green_gradient,
+                borderColor: green_gradient,
+                fill: 'false',
+                pointRadius: function(context) {
+                    if (context.dataIndex == context.dataset.data.length-1) {
+                        return 2;
+                    }else{       
+                        return 0;
+                    }
+                },
+                borderWidth:5,
+                pointHoverRadius: 5,
+                pointHitRadius: 5,
+                pointHoverBorderWidth: 5,
+                data: chiffres_vaccin_daily
+            },
+            {
                 label: 'nombre de français vaccinés',
                 backgroundColor: green_gradient,
                 borderColor: green_gradient,
@@ -142,7 +161,8 @@ green_gradient.addColorStop(1, 'chartreuse');
                 pointHoverRadius: 5,
                 pointHitRadius: 5,
                 pointHoverBorderWidth: 5,
-                data: chiffres_vaccin
+                type: 'line',
+                data: chiffres_vaccin,
             }]
         },
         options: options_chart_total_vaccin_3
@@ -167,7 +187,8 @@ $( function() {
                 chart_total_vaccin.options = options_chart_total_vaccin_1;
             }
             chart_total_vaccin.data.labels = dates_vaccin.slice(ui.values[ 0 ] , ui.values[ 1 ] );
-            chart_total_vaccin.data.datasets[0].data = chiffres_vaccin.slice(ui.values[ 0 ] , ui.values[ 1 ] );
+            chart_total_vaccin.data.datasets[0].data = chiffres_vaccin_daily.slice(ui.values[ 0 ] , ui.values[ 1 ] );
+            chart_total_vaccin.data.datasets[1].data = chiffres_vaccin.slice(ui.values[ 0 ] , ui.values[ 1 ] );
             chart_total_vaccin.update();
         } else {
             return false

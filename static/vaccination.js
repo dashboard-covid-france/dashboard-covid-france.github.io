@@ -125,7 +125,7 @@ green_gradient.addColorStop(1, 'chartreuse');
     var chart_total_vaccin = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: dates_vaccin,
+            labels: dates_vaccin.slice(0,-3),
             datasets: [{
                 type: 'bar',
                 label: 'vaccinations quotidiennes',
@@ -143,7 +143,7 @@ green_gradient.addColorStop(1, 'chartreuse');
                 pointHoverRadius: 5,
                 pointHitRadius: 5,
                 pointHoverBorderWidth: 5,
-                data: chiffres_vaccin_daily
+                data: chiffres_vaccin_daily.slice(0,-3)
             },
             {
                 label: 'nombre de français vaccinés',

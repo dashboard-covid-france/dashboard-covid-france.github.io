@@ -173,8 +173,8 @@ $( function() {
     $( "#slider_chart_total_vaccin" ).slider({
       range: true,
       min: 0,
-      max: dates_vaccin.length,
-      values: [ 0, dates_vaccin.length],
+      max: dates_vaccin.length - 2,
+      values: [ 0, dates_vaccin.length -2],
       slide: function( event, ui) {
         if(ui.values[ 1 ] - ui.values[ 0 ] > 1){
             if (ui.values[ 1 ] - ui.values[ 0 ] < 21){

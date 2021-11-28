@@ -165,7 +165,7 @@ green_gradient.addColorStop(1, 'chartreuse');
                 data: chiffres_vaccin,
             }]
         },
-        options: options_chart_total_vaccin_3
+        options: options_chart_total_vaccin_1
     });
 
 // slider chart total_vaccin
